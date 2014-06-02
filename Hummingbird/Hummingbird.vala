@@ -72,6 +72,22 @@ namespace Hummingbird {
 		}
 	}
 	public class User : Object, Petal.User {
-		User user = new User();
+		internal Petal.Backend backend { get; set; }
+		// TODO: get an API to set this stuff and update the profile
+		public string avatar { get; internal set; }
+		public string location { get; internal set; }
+		public string bio { get; internal set; }
+		public string cover_image { get; internal set; }
+		public string username { get; internal set; }
+		public bool authenticated { get; internal set; }
+		internal User (string name) {
+			this.username = name;
+		}
+		public async bool authenticate (string password) {
+			return false;
+		}
+		public async Petal.Library? get_library () {
+			return null;
+		}
 	}
 }
