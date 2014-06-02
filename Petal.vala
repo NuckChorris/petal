@@ -33,7 +33,7 @@ public interface Petal.Series : Object {
 }
 public interface Petal.Status : Object {
 	private abstract Petal.Backend backend { get; }
-	private abstract Petal.User user { get; }
+	public abstract Petal.User user { get; }
 	public abstract Petal.WatchingStatus status { get; }
 	public abstract Petal.Series series { get; }
 	public abstract uint watched { get; }
@@ -53,9 +53,9 @@ public interface Petal.Library : Object {
 	}
 }
 public interface Petal.User : Object {
-	private abstract Petal.Backend backend { get; }
-	public abstract string username { get; }
-	public abstract bool authenticated { get; }
-	public abstract bool authenticate (string password) throws Error;
-	public abstract async Petal.Library get_library () throws Error;
+	internal abstract Petal.Backend backend { get; set; }
+	public abstract string username { get; internal set; }
+	public abstract bool authenticated { get; internal set; default = false; }
+	public abstract async bool authenticate (string password) throws Error;
+	public abstract async Petal.Library? get_library () throws Error;
 }
