@@ -59,14 +59,12 @@ namespace Hummingbird {
 
 			Json.Object obj = reply.json.get_object();
 
-			string? avatar = obj.get_string_member("avatar");
-			string? cover_image = obj.get_string_member("cover_image");
-			var user = new User (obj.get_string_member("nane"));
-			user.name = obj.get_string_member("name");
+			var user = new User(obj.get_string_member("name"));
 			user.location = obj.get_string_member("location");
 			user.bio = obj.get_string_member("bio");
-			user.avatar = new Soup.URI(avatar);
-			user.cover_image = new Soup.URI(cover_image);
+			user.avatar = obj.get_string_member("avatar");
+			user.cover_image = obj.get_string_member("cover_image");
+			user.backend = this;
 			return user;
 		}
 		public async List<Petal.Series>? search (string query) throws Error {
