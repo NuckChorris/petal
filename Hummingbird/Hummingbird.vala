@@ -86,8 +86,30 @@ namespace Hummingbird {
 		internal User (string name) {
 			this.username = name;
 		}
-		public async bool authenticate (string password) {
-			return false;
+		public async bool authenticate (string password) throws Error {
+			Json.Node? root;
+			Json.Builder builder = new Json.Builder();
+			builder.begin_object();
+			builder.set_member_name("username");
+			builder.add_string_value(username);
+			builder.set_member_name("password");
+			builder.add_string_value(password);
+			builder.end_object();
+			Json.Generator generator = new Json.Generator();
+			generator.set_root(builder.get_root());
+
+			HTTPReply reply = yield api_call("POST", "/users/authenticate",
+			                                 generator.to_data(null), "application/json");
+
+			if (reply.status == Soup.Status.UNAUTHORIZED)
+				return false;
+			if (reply.status != Soup.Status.CREATED && reply.status % 500 < 100)
+				throw new HTTPError.THEY_FUCKED_UP(reply.status.to_string());
+			if (reply.status != Soup.Status.CREATED && reply.status % 400 < 100)
+				throw new HTTPError.WE_FUCKED_UP(reply.status.to_string());
+
+			auth_token = reply.json.get_string();
+			return true;
 		}
 		public async Petal.Library? get_library () {
 			return null;
