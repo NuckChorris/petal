@@ -79,7 +79,10 @@ namespace Hummingbird {
 		public string bio { get; internal set; }
 		public string cover_image { get; internal set; }
 		public string username { get; internal set; }
-		public bool authenticated { get; internal set; }
+		private string auth_token = null;
+		public bool authenticated {
+			get { return auth_token != null; }
+		}
 		internal User (string name) {
 			this.username = name;
 		}

@@ -55,7 +55,7 @@ public interface Petal.Library : Object {
 public interface Petal.User : Object {
 	internal abstract Petal.Backend backend { get; set; }
 	public abstract string username { get; internal set; }
-	public abstract bool authenticated { get; internal set; default = false; }
+	public abstract bool authenticated { get; }
 	public abstract async bool authenticate (string password) throws Error;
 	public abstract async Petal.Library? get_library () throws Error;
 }
