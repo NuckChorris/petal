@@ -13,7 +13,7 @@ namespace Hummingbird {
 		THEY_FUCKED_UP,
 		OTHER
 	}
-	public class Backend : Object, Petal.MultiUserBackend, Petal.Backend {
+	public class Backend : Object, Petal.Backend, Petal.MultiUserBackend {
 		internal static Soup.URI server = new Soup.URI("https://hbrd-v1.p.mashape.com/");
 		internal string api_key { get; set; }
 		internal async HTTPReply api_call (string method, string path, string payload = "",
