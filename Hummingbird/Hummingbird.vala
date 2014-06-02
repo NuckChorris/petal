@@ -43,15 +43,15 @@ namespace Hummingbird {
 				};
 			}
 		}
-		public async Petal.User? get_user (string username) {
+		public async Petal.User? get_user (string username) throws Error {
 			HTTPReply reply = yield api_call("GET", "/users/%s".printf(username));
 
 			if (reply.status == Soup.Status.NOT_FOUND)
 				return null;
 			if (reply.status != Soup.Status.OK && reply.status % 500 < 100)
-				throw new Nectar.Backend.HTTPError.THEY_FUCKED_UP(reply.status.to_string());
+				throw new HTTPError.THEY_FUCKED_UP(reply.status.to_string());
 			if (reply.status != Soup.Status.OK && reply.status % 400 < 100)
-				throw new Nectar.Backend.HTTPError.WE_FUCKED_UP(reply.status.to_string());
+				throw new HTTPError.WE_FUCKED_UP(reply.status.to_string());
 
 			Json.Object obj = reply.json.get_object();
 
@@ -64,6 +64,9 @@ namespace Hummingbird {
 			user.avatar = new Soup.URI(avatar);
 			user.cover_image = new Soup.URI(cover_image);
 			return user;
+		}
+		public async List<Petal.Series>? search (string query) throws Error {
+			return null;
 		}
 	}
 	public class User : Object, Petal.User {
