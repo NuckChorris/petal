@@ -19,13 +19,13 @@ public enum Petal.WatchingStatus {
 	DROPPED
 }
 public interface Petal.Backend : Object {
-	public abstract async List<Petal.Series> search (string query) throws Error;
+	public abstract async List<Petal.Series>? search (string query) throws Error;
 }
 public interface Petal.MultiUserBackend : Object, Petal.Backend {
 	public abstract async Petal.User? get_user (string user) throws Error;
 }
 public interface Petal.SingleUserBackend : Object, Petal.Backend {
-	public abstract async Petal.Library get_library () throws Error;
+	public abstract async Petal.Library? get_library () throws Error;
 }
 public interface Petal.Series : Object {
 	public abstract string title { get; }
