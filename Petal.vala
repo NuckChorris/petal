@@ -28,23 +28,23 @@ public interface Petal.SingleUserBackend : Object, Petal.Backend {
 	public abstract async Petal.Library? get_library () throws Error;
 }
 public interface Petal.Series : Object {
-	public abstract string title { get; }
-	public abstract string total_episodes { get; }
+	public abstract string title { get; internal set; }
+	public abstract string total_episodes { get; internal set; }
 }
 public interface Petal.Status : Object {
-	private abstract Petal.Backend backend { get; }
-	public abstract Petal.User user { get; }
-	public abstract Petal.WatchingStatus status { get; }
-	public abstract Petal.Series series { get; }
-	public abstract uint watched { get; }
+	internal abstract Petal.Backend backend { get; set; }
+	public abstract Petal.User user { get; internal set; }
+	public abstract Petal.WatchingStatus status { get; internal set; }
+	public abstract Petal.Series series { get; internal set; }
+	public abstract uint watched { get; internal set; }
 
 	public abstract async bool increment () throws Error;
 	public abstract async int? set_watched (uint watched) throws Error;
 	public abstract async int? set_status (Petal.WatchingStatus status) throws Error;
 }
 public interface Petal.Library : Object {
-	private abstract Petal.Backend backend { get; }
-	private abstract Petal.User user { get; }
+	internal abstract Petal.Backend backend { get; set; }
+	private abstract Petal.User user { get; internal set; }
 
 	public abstract List<Petal.Status> get_list () throws Error;
 
