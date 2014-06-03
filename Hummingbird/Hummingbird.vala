@@ -91,7 +91,8 @@ namespace Hummingbird {
 			Json.Builder builder = new Json.Builder();
 			builder.begin_object();
 			builder.set_member_name("username");
-			builder.add_string_value(username);
+			// WORKAROUND for issue #10 on Hummingbird
+			builder.add_string_value(username.down());
 			builder.set_member_name("password");
 			builder.add_string_value(password);
 			builder.end_object();
