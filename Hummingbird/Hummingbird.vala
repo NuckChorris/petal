@@ -98,8 +98,8 @@ namespace Hummingbird {
 			Json.Generator generator = new Json.Generator();
 			generator.set_root(builder.get_root());
 
-			HTTPReply reply = yield api_call("POST", "/users/authenticate",
-			                                 generator.to_data(null), "application/json");
+			HTTPReply reply = yield (backend as Backend).api_call("POST", "/users/authenticate",
+			                                                      generator.to_data(null), "application/json");
 
 			if (reply.status == Soup.Status.UNAUTHORIZED)
 				return false;
