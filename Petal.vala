@@ -47,9 +47,8 @@ public interface Petal.Series : Object {
 	public abstract string title { get; internal set; }
 	public abstract uint total_episodes { get; internal set; }
 }
-public interface Petal.Status : Object {
+public interface Petal.Status : Petal.Series {
 	public abstract Petal.WatchingStatus status { get; internal set; }
-	public abstract Petal.Series series { get; internal set; }
 	public abstract uint watched { get; internal set; }
 
 	public abstract async bool increment () throws Error;
