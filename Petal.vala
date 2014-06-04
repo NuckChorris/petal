@@ -12,11 +12,11 @@
  * eschew authentication entirely (as LevelDB does), if they disable the multi_user flag.
  */
 public enum Petal.WatchingStatus {
-	CURRENTLY_WATCHING,
-	PLAN_TO_WATCH,
-	COMPLETED,
-	ON_HOLD,
-	DROPPED
+	DROPPED = 0,
+	ON_HOLD = 1,
+	PLAN_TO_WATCH = 2,
+	CURRENTLY_WATCHING = 3,
+	COMPLETED = 4
 }
 public interface Petal.Backend : Object {
 	public abstract async List<Petal.Series>? search (string query) throws Error;
