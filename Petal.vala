@@ -56,7 +56,9 @@ public interface Petal.Status : Petal.Series {
 	public abstract async int? set_status (Petal.WatchingStatus status) throws Error;
 }
 public interface Petal.Library : Object {
+	public abstract List<Petal.Status> get_list_by_status (Petal.WatchingStatus status) throws Error;
 	public abstract List<Petal.Status> get_list () throws Error;
+	public abstract void add_item (Petal.Status status) throws Error;
 
 	public virtual async bool synchronize (Petal.Library other_library) throws Error {
 		return false;
