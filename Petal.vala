@@ -39,6 +39,11 @@ public interface Petal.SingleUserBackend : Object, Petal.Backend {
 	public abstract async Petal.Library? get_library () throws Error;
 }
 public interface Petal.Series : Object {
+	public abstract Petal.AiringStatus? status { get; internal set; }
+	public abstract Petal.ShowType? show_type { get; internal set; }
+	public abstract string url { get; internal set; }
+	public abstract string cover_image { get; internal set; }
+	public abstract string synopsis { get; internal set; }
 	public abstract string title { get; internal set; }
 	public abstract string total_episodes { get; internal set; }
 }
