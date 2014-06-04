@@ -45,7 +45,7 @@ public interface Petal.Series : Object {
 	public abstract string cover_image { get; internal set; }
 	public abstract string synopsis { get; internal set; }
 	public abstract string title { get; internal set; }
-	public abstract string total_episodes { get; internal set; }
+	public abstract uint total_episodes { get; internal set; }
 }
 public interface Petal.Status : Object {
 	public abstract Petal.WatchingStatus status { get; internal set; }
