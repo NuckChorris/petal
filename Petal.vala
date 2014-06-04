@@ -32,8 +32,6 @@ public interface Petal.Series : Object {
 	public abstract string total_episodes { get; internal set; }
 }
 public interface Petal.Status : Object {
-	internal abstract Petal.Backend backend { get; set; }
-	public abstract Petal.User user { get; internal set; }
 	public abstract Petal.WatchingStatus status { get; internal set; }
 	public abstract Petal.Series series { get; internal set; }
 	public abstract uint watched { get; internal set; }
@@ -43,9 +41,6 @@ public interface Petal.Status : Object {
 	public abstract async int? set_status (Petal.WatchingStatus status) throws Error;
 }
 public interface Petal.Library : Object {
-	internal abstract Petal.Backend backend { get; set; }
-	private abstract Petal.User user { get; internal set; }
-
 	public abstract List<Petal.Status> get_list () throws Error;
 
 	public virtual async bool synchronize (Petal.Library other_library) throws Error {
@@ -53,7 +48,6 @@ public interface Petal.Library : Object {
 	}
 }
 public interface Petal.User : Object {
-	internal abstract Petal.Backend backend { get; set; }
 	public abstract string username { get; internal set; }
 	public abstract bool authenticated { get; }
 	public abstract async bool authenticate (string password) throws Error;
