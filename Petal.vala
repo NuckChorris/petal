@@ -18,6 +18,17 @@ public enum Petal.WatchingStatus {
 	CURRENTLY_WATCHING = 3,
 	COMPLETED = 4
 }
+public enum Petal.AiringStatus {
+	NOT_YET_AIRED = 0,
+	CURRENTLY_AIRING = 1,
+	FINISHED_AIRING = 2
+}
+public enum Petal.ShowType {
+	TV = 0,
+	OVA = 1,
+	SPECIAL = 2,
+	MOVIE = 3
+}
 public interface Petal.Backend : Object {
 	public abstract async List<Petal.Series>? search (string query) throws Error;
 }
