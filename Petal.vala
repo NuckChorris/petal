@@ -38,7 +38,22 @@ public interface Petal.MultiUserBackend : Object, Petal.Backend {
 public interface Petal.SingleUserBackend : Object, Petal.Backend {
 	public abstract async Petal.Library? get_library () throws Error;
 }
-public interface Petal.Series : Object {
+public interface Petal.User : Object, AsyncInitable {
+	public abstract string username { get; internal set; }
+	public abstract bool authenticated { get; }
+	public abstract async bool authenticate (string password) throws Error;
+	public abstract async Petal.Library? get_library () throws Error;
+}
+public interface Petal.Library : Object, AsyncInitable {
+	public abstract unowned List<Petal.Status> get_list_by_status (Petal.WatchingStatus status) throws Error;
+	public abstract unowned List<Petal.Status> get_list () throws Error;
+	public abstract void add_item (Petal.Status status) throws Error;
+
+	public virtual async bool synchronize (Petal.Library other_library) throws Error {
+		return false;
+	}
+}
+public interface Petal.Series : Object, AsyncInitable {
 	public abstract Petal.AiringStatus? status { get; internal set; }
 	public abstract Petal.ShowType? show_type { get; internal set; }
 	public abstract string url { get; internal set; }
@@ -47,26 +62,11 @@ public interface Petal.Series : Object {
 	public abstract string title { get; internal set; }
 	public abstract uint total_episodes { get; internal set; }
 }
-public interface Petal.Status : Petal.Series {
-	public abstract Petal.WatchingStatus status { get; internal set; }
-	public abstract uint watched { get; internal set; }
+public interface Petal.Status : Object, Petal.Series, AsyncInitable {
+	public abstract Petal.WatchingStatus status { get; }
+	public abstract uint watched { get; }
 
 	public abstract async bool increment () throws Error;
 	public abstract async int? set_watched (uint watched) throws Error;
 	public abstract async int? set_status (Petal.WatchingStatus status) throws Error;
-}
-public interface Petal.Library : Object {
-	public abstract List<Petal.Status> get_list_by_status (Petal.WatchingStatus status) throws Error;
-	public abstract List<Petal.Status> get_list () throws Error;
-	public abstract void add_item (Petal.Status status) throws Error;
-
-	public virtual async bool synchronize (Petal.Library other_library) throws Error {
-		return false;
-	}
-}
-public interface Petal.User : Object {
-	public abstract string username { get; internal set; }
-	public abstract bool authenticated { get; }
-	public abstract async bool authenticate (string password) throws Error;
-	public abstract async Petal.Library? get_library () throws Error;
 }
